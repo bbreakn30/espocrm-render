@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: espocrm
+      POSTGRES_USER: espocrm
+      POSTGRES_PASSWORD: espopass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  espocrm:
+    image: danielberndt/docker-espocrm
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=espocrm
+      - DB_USER=espocrm
+      - DB_PASSWORD=espopass
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
