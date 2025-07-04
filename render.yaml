@@ -2,8 +2,9 @@ services:
   - type: web
     name: espocrm
     env: docker
-    region: oregon
     plan: free
+    region: oregon
     dockerComposePath: ./docker-compose.yml
     autoDeploy: true
+
 
